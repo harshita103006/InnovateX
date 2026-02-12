@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vajra AI - Integrity Meets Intelligence</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --gradient-1: linear-gradient(135deg, #0f172a, #1e293b);
+            --gradient-2: linear-gradient(135deg, #3b82f6, #6366f1);
+            --gradient-3: linear-gradient(135deg, #10b981, #14b8a6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: #334155;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Simple Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.4;
+            background-image: radial-gradient(circle at 1px 1px, #cbd5e1 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: white;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .navbar-logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            background: url("https://z-cdn-media.chatglm.cn/files/45c99c91-8c8e-4094-9b4b-ca9b111e7854.jpeg?auth_key=1870833239-076e0ed2467749439a836ccf8fab9e5d-0-26a95fc367518984309e200898c92555") center/cover;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
+            animation: logo-glow 3s ease-in-out infinite alternate;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .navbar-logo::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.3), transparent, rgba(99, 102, 241, 0.3), transparent, rgba(59, 130, 246, 0.3));
+            animation: logo-pulse 2s linear infinite;
+        }
+
+        @keyframes logo-glow {
+            0% {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(99, 102, 241, 0.8), 0 0 80px rgba(99, 102, 241, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3);
+            }
+        }
+
+        @keyframes logo-pulse {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.8), 0 0 100px rgba(59, 130, 246, 0.4);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 15px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Hero Section */
+        .hero-section {
+            background: var(--gradient-1);
+            color: white;
+            padding: 30px 0 120px;
+            position: relative;
+            overflow: hidden;
+            margin-top: -1px; /* Remove any gap */
+        }
+
+        /* AI Core Visual */
+        .hero-ai-core {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .ai-core-visual {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: core-rotate 20s linear infinite;
+        }
+
+        @keyframes core-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Neural Network Background */
+        .hero-neural {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url("data:image/svg+xml,%3Csvg width='1000' height='600' viewBox='0 0 1000 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='0.5' fill='none' opacity='0.1'%3E%3Ccircle cx='200' cy='150' r='3'/%3E%3Ccircle cx='400' cy='100' r='3'/%3E%3Ccircle cx='600' cy='150' r='3'/%3E%3Ccircle cx='800' cy='100' r='3'/%3E%3Ccircle cx='300' cy='300' r='3'/%3E%3Ccircle cx='500' cy='250' r='3'/%3E%3Ccircle cx='700' cy='300' r='3'/%3E%3Ccircle cx='200' cy='450' r='3'/%3E%3Ccircle cx='400' cy='500' r='3'/%3E%3Ccircle cx='600' cy='450' r='3'/%3E%3Ccircle cx='800' cy='500' r='3'/%3E%3Cpath d='M200 150L300 300M400 100L500 250M600 150L700 300M800 100L700 300M300 300L400 500M500 250L600 450M700 300L800 500'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        /* Floating Particles */
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 10%; animation: float-up 8s infinite linear; }
+        .particle:nth-child(2) { top: 30%; left: 20%; animation: float-up 12s infinite linear; }
+        .particle:nth-child(3) { top: 40%; left: 30%; animation: float-up 10s infinite linear; }
+        .particle:nth-child(4) { top: 25%; left: 40%; animation: float-up 9s infinite linear; }
+        .particle:nth-child(5) { top: 35%; left: 50%; animation: float-up 11s infinite linear; }
+        .particle:nth-child(6) { top: 45%; left: 60%; animation: float-up 7s infinite linear; }
+        .particle:nth-child(7) { top: 30%; left: 70%; animation: float-up 13s infinite linear; }
+        .particle:nth-child(8) { top: 40%; left: 80%; animation: float-up 8s infinite linear; }
+        .particle:nth-child(9) { top: 50%; left: 90%; animation: float-up 10s infinite linear; }
+        .particle:nth-child(10) { top: 60%; left: 15%; animation: float-up 12s infinite linear; }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+        }
+
+        /* Data Stream Lines */
+        .hero-data-stream {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .data-stream {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), transparent);
+            animation: stream-flow 5s infinite linear;
+        }
+
+        .data-stream:nth-child(1) { top: 20%; width: 60%; left: -60%; animation-duration: 7s; }
+        .data-stream:nth-child(2) { top: 40%; width: 40%; left: -40%; animation-duration: 5s; animation-delay: 1s; }
+        .data-stream:nth-child(3) { top: 60%; width: 80%; left: -80%; animation-duration: 9s; animation-delay: 2s; }
+        .data-stream:nth-child(4) { top: 80%; width: 50%; left: -50%; animation-duration: 6s; animation-delay: 3s; }
+
+        @keyframes stream-flow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 100%)); }
+        }
+
+        /* Glowing Orbs */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .orb-1 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(59, 130, 246, 0) 70%);
+            top: 10%;
+            left: 5%;
+            animation: pulse 4s infinite alternate;
+        }
+
+        .orb-2 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(99, 102, 241, 0) 70%);
+            bottom: 20%;
+            right: 10%;
+            animation: pulse 5s infinite alternate-reverse;
+        }
+
+        .orb-3 {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0) 70%);
+            top: 60%;
+            left: 70%;
+            animation: pulse 6s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Circuit Lines */
+        .hero-circuit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url("data:image/svg+xml,%3Csvg width='1000' height='600' viewBox='0 0 1000 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='0.5' fill='none' opacity='0.15'%3E%3Cpath d='M0 300h1000M500 0v600M200 0v600M800 0v600M0 200h1000M0 400h1000'/%3E%3Ccircle cx='200' cy='200' r='3'/%3E%3Ccircle cx='800' cy='200' r='3'/%3E%3Ccircle cx='200' cy='400' r='3'/%3E%3Ccircle cx='800' cy='400' r='3'/%3E%3Cpath d='M200 200L500 300M800 200L500 300M200 400L500 300M800 400L500 300'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-weight: 900;
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 35px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .feature-icon i {
+            font-size: 2.5rem;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Enhanced AI Background Effects */
+        .feature-icon .ai-neural-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='0.8' fill='none' opacity='0.4'%3E%3Ccircle cx='20' cy='20' r='3'/%3E%3Ccircle cx='60' cy='20' r='3'/%3E%3Ccircle cx='20' cy='60' r='3'/%3E%3Ccircle cx='60' cy='60' r='3'/%3E%3Ccircle cx='40' cy='40' r='4'/%3E%3Cpath d='M20 20L40 40M60 20L40 40M20 60L40 40M60 60L40 40'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.7;
+            animation: neural-pulse 3s infinite alternate;
+        }
+
+        @keyframes neural-pulse {
+            0% { opacity: 0.4; transform: scale(0.95); }
+            100% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .feature-icon .ai-brain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M27 20c0-3.3 2.7-6 6-6s6 2.7 6 6v12c0 3.3-2.7 6-6 6s-6-2.7-6-6V20zM40 13c0-3.3 2.7-6 6-6s6 2.7 6 6v24c0 3.3-2.7 6-6 6s-6-2.7-6-6V13z'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.8;
+            animation: brain-pulse 4s infinite alternate;
+        }
+
+        .feature-icon .ai-circuit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='0.8' fill='none' opacity='0.4'%3E%3Cpath d='M13 40h54M40 13v54'/%3E%3Cpath d='M13 13h54v54H13z'/%3E%3Cpath d='M26 26h28v28H26z'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.7;
+            animation: circuit-flow 3s linear infinite;
+        }
+
+        @keyframes circuit-flow {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.4; }
+        }
+
+        .feature-icon .ai-dataflow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .feature-icon .ai-dataflow::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23ffffff' stroke-width='0.8' fill='none' opacity='0.3'%3E%3Cpath d='M0 40h80M40 0v80M20 0l40 80M60 0L20 80'/%3E%3Ccircle cx='20' cy='20' r='2' fill='%23ffffff'/%3E%3Ccircle cx='60' cy='20' r='2' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='60' r='2' fill='%23ffffff'/%3E%3Ccircle cx='60' cy='60' r='2' fill='%23ffffff'/%3E%3C/g%3E%3C/svg%3E");
+            animation: dataflow 6s linear infinite;
+        }
+
+        /* Glowing effect for icons */
+        .feature-icon .tech-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-icon:hover .tech-glow {
+            opacity: 1;
+        }
+
+        /* Different AI effect for each feature */
+        .feature-card:nth-child(1) .feature-icon .ai-neural-bg { display: block; }
+        .feature-card:nth-child(2) .feature-icon .ai-brain { display: block; }
+        .feature-card:nth-child(3) .feature-icon .ai-circuit { display: block; }
+        .feature-card:nth-child(4) .feature-icon .ai-dataflow { display: block; }
+
+        .feature-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-text {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .feature-link {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .feature-link:hover {
+            color: #2563eb;
+            transform: translateX(6px);
+        }
+
+        .feature-link i {
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        /* Page Container */
+        .page-container {
+            display: block;
+            min-height: 100vh;
+            padding-top: 0px; /* No padding - navbar and hero touch directly */
+        }
+
+        .page-container.hidden {
+            display: none;
+        }
+
+        /* Analysis Page Styles */
+        .analysis-page {
+            background-color: white;
+            min-height: calc(100vh - 0px);
+            padding: 50px 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page-header {
+            background: var(--gradient-1);
+            color: white;
+            padding: 80px 0;
+            margin: -50px 0 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0) 70%);
+            top: -200px;
+            right: -150px;
+        }
+
+        .page-header::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+            bottom: -150px;
+            left: 100px;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Email Text Input Area */
+        .email-input-area {
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 30px 0;
+            min-height: 200px;
+            width: 100%;
+            resize: vertical;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-input-area:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        /* Enhanced File Upload Area */
+        .file-upload-area {
+            border: 3px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 80px;
+            text-align: center;
+            background-color: #f8fafc;
+            margin: 40px 0;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-area::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%233b82f6' stroke-width='0.5' fill='none' opacity='0.1'%3E%3Cpath d='M50 5L95 50L50 95L5 50z'/%3E%3Cpath d='M5 5L50 50L5 95L95 50z'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.05;
+            background-size: 20px 20px;
+        }
+
+        .file-upload-area:hover {
+            background-color: #f1f5f9;
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .file-upload-icon {
+            font-size: 5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            animation: upload-bounce 2s infinite;
+        }
+
+        @keyframes upload-bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .file-upload-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .file-upload-subtext {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 25px 0;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .file-item:hover {
+            background-color: #e2e8f0;
+            transform: translateX(5px);
+        }
+
+        .file-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+        }
+
+        .file-size {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .file-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 1.3rem;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .file-remove:hover {
+            transform: scale(1.2);
+            color: #dc2626;
+        }
+
+        .analyze-btn {
+            background: var(--gradient-2);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 18px 36px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background-color: #e2e8f0;
+            border-radius: 20px;
+            height: 10px;
+            overflow: hidden;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-2);
+            border-radius: 20px;
+            transition: width 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Analysis Results */
+        .analysis-result {
+            margin-top: 40px;
+            padding: 40px;
+            border-radius: 20px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            animation: slideIn 0.5s ease;
+            display: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .risk-meter {
+            height: 50px;
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: #e2e8f0;
+            margin: 30px 0;
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .risk-meter-fill {
+            height: 100%;
+            border-radius: 25px;
+            transition: width 1.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-low {
+            background: var(--gradient-3);
+        }
+
+        .risk-medium {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+        }
+
+        .risk-high {
+            background: linear-gradient(90deg, #ef4444, #f87171);
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-1);
+            color: white;
+            padding: 80px 0 40px;
+            margin-top: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Add decorative elements to footer */
+        .footer::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+            top: -200px;
+            right: -150px;
+        }
+
+        .footer::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0) 70%);
+            bottom: -150px;
+            left: 100px;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-link:hover {
+            color: white;
+            transform: translateX(6px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .feature-card {
+                margin-bottom: 25px;
+            }
+            
+            .hero-ai-core {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .navbar-logo {
+                width: 50px;
+                height: 50px;
+                margin-right: 15px;
+            }
+            
+            .navbar-brand {
+                font-size: 1.8rem;
+            }
+            
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .feature-icon i {
+                font-size: 2rem;
+            }
+            
+            .file-upload-area {
+                padding: 60px;
+            }
+            
+            .file-upload-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Pattern -->
+    <div class="bg-pattern"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="navbar-logo"></div>
+                Vajra AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHome()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div class="page-container" id="homePage">
+        <!-- Hero Section with Enhanced AI Graphics -->
+        <section class="hero-section">
+            <!-- Neural Network Background -->
+            <div class="hero-neural"></div>
+            
+            <!-- Circuit Lines -->
+            <div class="hero-circuit"></div>
+            
+            <!-- Floating Particles -->
+            <div class="hero-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            
+            <!-- Data Stream Lines -->
+            <div class="hero-data-stream">
+                <div class="data-stream"></div>
+                <div class="data-stream"></div>
+                <div class="data-stream"></div>
+                <div class="data-stream"></div>
+            </div>
+            
+            <!-- Glowing Orbs -->
+            <div class="hero-orb orb-1"></div>
+            <div class="hero-orb orb-2"></div>
+            <div class="hero-orb orb-3"></div>
+            
+            <!-- AI Core Visual -->
+            <div class="hero-ai-core">
+                <div class="ai-core-visual">
+                    <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Outer Ring -->
+                        <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(59, 130, 246, 0.4)" stroke-width="3"/>
+                        <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(99, 102, 241, 0.3)" stroke-width="2"/>
+                        
+                        <!-- Neural Connections -->
+                        <g stroke="rgba(255, 255, 255, 0.5)" stroke-width="1.5" fill="none">
+                            <line x1="200" y1="200" x2="100" y2="100"/>
+                            <line x1="200" y1="200" x2="300" y2="100"/>
+                            <line x1="200" y1="200" x2="100" y2="300"/>
+                            <line x1="200" y1="200" x2="300" y2="300"/>
+                            <line x1="200" y1="200" x2="200" y2="50"/>
+                            <line x1="200" y1="200" x2="200" y2="350"/>
+                            <line x1="200" y1="200" x2="50" y2="200"/>
+                            <line x1="200" y1="200" x2="350" y2="200"/>
+                        </g>
+                        
+                        <!-- Neural Nodes -->
+                        <g fill="rgba(59, 130, 246, 0.7)">
+                            <circle cx="200" cy="200" r="10"/>
+                            <circle cx="100" cy="100" r="7"/>
+                            <circle cx="300" cy="100" r="7"/>
+                            <circle cx="100" cy="300" r="7"/>
+                            <circle cx="300" cy="300" r="7"/>
+                            <circle cx="200" cy="50" r="7"/>
+                            <circle cx="200" cy="350" r="7"/>
+                            <circle cx="50" cy="200" r="7"/>
+                            <circle cx="350" cy="200" r="7"/>
+                        </g>
+                        
+                        <!-- Inner Hexagon -->
+                        <polygon points="200,140 250,170 250,230 200,260 150,230 150,170" 
+                                 fill="none" stroke="rgba(16, 185, 129, 0.6)" stroke-width="2"/>
+                        
+                        <!-- Center Core -->
+                        <circle cx="200" cy="200" r="40" fill="rgba(59, 130, 246, 0.2)" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2"/>
+                        <circle cx="200" cy="200" r="20" fill="rgba(99, 102, 241, 0.4)"/>
+                        
+                        <!-- Data Particles -->
+                        <g fill="rgba(255, 255, 255, 0.8)">
+                            <circle cx="130" cy="130" r="3">
+                                <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="270" cy="130" r="3">
+                                <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="130" cy="270" r="3">
+                                <animate attributeName="opacity" values="0;1;0" dur="3s" begin="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="270" cy="270" r="3">
+                                <animate attributeName="opacity" values="0;1;0" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="container hero-content">
+                <h1 class="hero-title">Integrity Meets Intelligence</h1>
+                <p class="hero-subtitle">Advanced AI-powered fraud detection system protecting your digital assets</p>
+            </div>
+        </section>
+
+        <!-- Feature Cards -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="feature-card" onclick="navigateToFeature('email')">
+                        <div class="feature-icon">
+                            <div class="ai-neural-bg"></div>
+                            <div class="tech-glow"></div>
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Email Analysis</h3>
+                        <p class="feature-text">Detect fraudulent emails using advanced AI models with high accuracy and real-time analysis.</p>
+                        <a href="#" class="feature-link">
+                            Analyze Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="feature-card" onclick="navigateToFeature('attachment')">
+                        <div class="feature-icon">
+                            <div class="ai-brain"></div>
+                            <div class="tech-glow"></div>
+                            <i class="bi bi-file-earmark-zip-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Attachment Verification</h3>
+                        <p class="feature-text">Secure sandbox environment to analyze attachments for malicious content and potential threats.</p>
+                        <a href="#" class="feature-link">
+                            Verify Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="feature-card" onclick="navigateToFeature('url')">
+                        <div class="feature-icon">
+                            <div class="ai-circuit"></div>
+                            <div class="tech-glow"></div>
+                            <i class="bi bi-link-45deg"></i>
+                        </div>
+                        <h3 class="feature-title">URL Analysis</h3>
+                        <p class="feature-text">Detect phishing attempts and cookie manipulation through advanced URL analysis techniques.</p>
+                        <a href="#" class="feature-link">
+                            Analyze Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="feature-card" onclick="navigateToFeature('voice')">
+                        <div class="feature-icon">
+                            <div class="ai-dataflow"></div>
+                            <div class="tech-glow"></div>
+                            <i class="bi bi-mic-fill"></i>
+                        </div>
+                        <h3 class="feature-title">Voice Analysis</h3>
+                        <p class="feature-text">Detect deepfake voice scams with cutting-edge AI technology and advanced audio processing.</p>
+                        <a href="#" class="feature-link">
+                            Analyze Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <h5 class="footer-title">Vajra AI</h5>
+                        <p class="mb-3">Advanced fraud detection system powered by AI</p>
+                    </div>
+                    <div class="col-md-2 mb-4">
+                        <h6 class="mb-3">Quick Links</h6>
+                        <div class="d-flex flex-column">
+                            <a href="#" class="footer-link">Home</a>
+                            <a href="#" class="footer-link">Features</a>
+                            <a href="#" class="footer-link">About</a>
+                            <a href="#" class="footer-link">Contact</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <h6 class="mb-3">Features</h6>
+                        <div class="d-flex flex-column">
+                            <a href="#" class="footer-link">Email Analysis</a>
+                            <a href="#" class="footer-link">URL Analysis</a>
+                            <a href="#" class="footer-link">Voice Analysis</a>
+                            <a href="#" class="footer-link">Attachment Verification</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <h6 class="mb-3">Contact</h6>
+                        <div class="d-flex flex-column">
+                            <a href="#" class="footer-link">info@vajra.ai</a>
+                            <a href="#" class="footer-link">+1 (555) 123-4567</a>
+                            <a href="#" class="footer-link">San Francisco, CA</a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4" style="background-color: rgba(255,255,255,0.1);">
+                    <div class="text-center">
+                        <p>&copy; 2023 Vajra AI. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Email Analysis Page -->
+    <div class="page-container hidden" id="emailPage">
+        <div class="analysis-page">
+            <div class="page-header">
+                <div class="container">
+                    <a href="#" class="back-button" onclick="showHome()">
+                        <i class="bi bi-arrow-left me-2"></i> Back to Home
+                    </a>
+                    <h1 class="page-title">Email Analysis</h1>
+                    <p class="page-subtitle">Our system uses multiple AI models to detect fraudulent emails with high accuracy.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="mb-4">
+                            <label for="emailContent" class="form-label">Paste Email Content</label>
+                            <textarea class="email-input-area" id="emailContent" rows="10" placeholder="Paste email content here..."></textarea>
+                        </div>
+                        
+                        <button class="analyze-btn" id="analyzeEmailBtn" onclick="analyzeEmail()">
+                            <i class="bi bi-search me-2"></i> Analyze Email
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-card">
+                            <h6 class="text-muted mb-3">Analysis Features</h6>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Content analysis</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Sender verification</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Link scanning</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-shield-lock text-primary me-3"></i>
+                                <span>PII data masking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analysis-result" id="emailAnalysisResult">
+                <h4 class="mb-4">Analysis Results</h4>
+                <div class="risk-meter">
+                    <div class="risk-meter-fill" id="emailRiskMeter"></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <h6>Risk Level: <span id="emailRiskLevel" class="fw-bold"></span></h6>
+                    <h6>Risk Score: <span id="emailRiskScore" class="fw-bold"></span>%</h6>
+                </div>
+                <div id="emailAnalysisDetails" class="mt-4"></div>
+            </div>
+            
+            <div class="text-center" id="emailAnalysisLoader" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Analyzing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attachment Verification Page -->
+    <div class="page-container hidden" id="attachmentPage">
+        <div class="analysis-page">
+            <div class="page-header">
+                <div class="container">
+                    <a href="#" class="back-button" onclick="showHome()">
+                        <i class="bi bi-arrow-left me-2"></i> Back to Home
+                    </a>
+                    <h1 class="page-title">Attachment Verification</h1>
+                    <p class="page-subtitle">Secure sandbox environment to analyze attachments for malicious content and potential threats.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="file-upload-area" id="attachmentUploadArea" onclick="document.getElementById('attachmentFileInput').click()">
+                            <div class="file-upload-icon">
+                                <i class="bi bi-file-earmark-zip-fill"></i>
+                            </div>
+                            <div class="file-upload-text">Drop files here or click to upload</div>
+                            <div class="file-upload-subtext">Support for PDF, DOC, DOCX, XLS, XLSX, EXE, ZIP</div>
+                            <input type="file" id="attachmentFileInput" class="file-input" multiple>
+                        </div>
+                        
+                        <div class="file-list" id="attachmentFileList"></div>
+                        
+                        <div class="progress-container" id="attachmentUploadProgress">
+                            <div class="progress-bar" id="attachmentProgressBar" style="width: 0%;"></div>
+                        </div>
+                        
+                        <button class="analyze-btn" id="attachmentAnalyzeBtn" onclick="analyzeAttachments()" disabled>
+                            <i class="bi bi-search me-2"></i> Analyze Selected Files
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-card">
+                            <h6 class="text-muted mb-3">Analysis Features</h6>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Secure sandbox</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Malware detection</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Content analysis</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-shield-check text-primary me-3"></i>
+                                <span>Behavior monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analysis-result" id="attachmentAnalysisResult">
+                <h4 class="mb-4">Analysis Results</h4>
+                <div class="risk-meter">
+                    <div class="risk-meter-fill" id="attachmentRiskMeter"></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <h6>Risk Level: <span id="attachmentRiskLevel" class="fw-bold"></span></h6>
+                    <h6>Risk Score: <span id="attachmentRiskScore" class="fw-bold"></span>%</h6>
+                </div>
+                <div id="attachmentAnalysisDetails" class="mt-4"></div>
+            </div>
+            
+            <div class="text-center" id="attachmentAnalysisLoader" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Analyzing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- URL Analysis Page -->
+    <div class="page-container hidden" id="urlPage">
+        <div class="analysis-page">
+            <div class="page-header">
+                <div class="container">
+                    <a href="#" class="back-button" onclick="showHome()">
+                        <i class="bi bi-arrow-left me-2"></i> Back to Home
+                    </a>
+                    <h1 class="page-title">URL Analysis</h1>
+                    <p class="page-subtitle">Detect phishing attempts and cookie manipulation through advanced URL analysis techniques.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="file-upload-area" id="urlUploadArea" onclick="document.getElementById('urlFileInput').click()">
+                            <div class="file-upload-icon">
+                                <i class="bi bi-link-45deg"></i>
+                            </div>
+                            <div class="file-upload-text">Drop URL files here or click to upload</div>
+                            <div class="file-upload-subtext">Support for .txt, .csv, .json formats containing URLs</div>
+                            <input type="file" id="urlFileInput" class="file-input" accept=".txt,.csv,.json" multiple>
+                        </div>
+                        
+                        <div class="file-list" id="urlFileList"></div>
+                        
+                        <div class="progress-container" id="urlUploadProgress">
+                            <div class="progress-bar" id="urlProgressBar" style="width: 0%;"></div>
+                        </div>
+                        
+                        <button class="analyze-btn" id="urlAnalyzeBtn" onclick="analyzeUrls()" disabled>
+                            <i class="bi bi-search me-2"></i> Analyze Selected Files
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-card">
+                            <h6 class="text-muted mb-3">Analysis Features</h6>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Domain reputation</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>URL structure</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>SSL verification</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-shield-check text-primary me-3"></i>
+                                <span>Phishing detection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analysis-result" id="urlAnalysisResult">
+                <h4 class="mb-4">Analysis Results</h4>
+                <div class="risk-meter">
+                    <div class="risk-meter-fill" id="urlRiskMeter"></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <h6>Risk Level: <span id="urlRiskLevel" class="fw-bold"></span></h6>
+                    <h6>Risk Score: <span id="urlRiskScore" class="fw-bold"></span>%</h6>
+                </div>
+                <div id="urlAnalysisDetails" class="mt-4"></div>
+            </div>
+            
+            <div class="text-center" id="urlAnalysisLoader" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Analyzing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Analysis Page -->
+    <div class="page-container hidden" id="voicePage">
+        <div class="analysis-page">
+            <div class="page-header">
+                <div class="container">
+                    <a href="#" class="back-button" onclick="showHome()">
+                        <i class="bi bi-arrow-left me-2"></i> Back to Home
+                    </a>
+                    <h1 class="page-title">Voice Analysis</h1>
+                    <p class="page-subtitle">Detect deepfake voice scams with cutting-edge AI technology and advanced audio processing.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="file-upload-area" id="voiceUploadArea" onclick="document.getElementById('voiceFileInput').click()">
+                            <div class="file-upload-icon">
+                                <i class="bi bi-mic-fill"></i>
+                            </div>
+                            <div class="file-upload-text">Drop audio files here or click to upload</div>
+                            <div class="file-upload-subtext">Support for MP3, WAV, M4A, FLAC, OGG formats</div>
+                            <input type="file" id="voiceFileInput" class="file-input" accept="audio/*" multiple>
+                        </div>
+                        
+                        <div class="file-list" id="voiceFileList"></div>
+                        
+                        <div class="progress-container" id="voiceUploadProgress">
+                            <div class="progress-bar" id="voiceProgressBar" style="width: 0%;"></div>
+                        </div>
+                        
+                        <button class="analyze-btn" id="voiceAnalyzeBtn" onclick="analyzeVoices()" disabled>
+                            <i class="bi bi-search me-2"></i> Analyze Selected Audio Files
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-card">
+                            <h6 class="text-muted mb-3">Analysis Features</h6>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Deepfake detection</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Voice pattern analysis</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <span>Spectral analysis</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-shield-check text-primary me-3"></i>
+                                <span>Audio quality check</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analysis-result" id="voiceAnalysisResult">
+                <h4 class="mb-4">Analysis Results</h4>
+                <div class="risk-meter">
+                    <div class="risk-meter-fill" id="voiceRiskMeter"></div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <h6>Risk Level: <span id="voiceRiskLevel" class="fw-bold"></span></h6>
+                    <h6>Risk Score: <span id="voiceRiskScore" class="fw-bold"></span>%</h6>
+                </div>
+                <div id="voiceAnalysisDetails" class="mt-4"></div>
+            </div>
+            
+            <div class="text-center" id="voiceAnalysisLoader" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Analyzing...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Global variables for each feature
+        let selectedFiles = {
+            attachment: [],
+            url: [],
+            voice: []
+        };
+        
+        // Navigation functions
+        function showHome() {
+            hideAllPages();
+            document.getElementById('homePage').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+        
+        function hideAllPages() {
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.add('hidden');
+            });
+        }
+        
+        // Navigate to feature page
+        function navigateToFeature(feature) {
+            hideAllPages();
+            
+            const pageMap = {
+                'email': 'emailPage',
+                'attachment': 'attachmentPage',
+                'url': 'urlPage',
+                'voice': 'voicePage'
+            };
+            
+            if (pageMap[feature]) {
+                document.getElementById(pageMap[feature]).classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // Email Analysis
+        function analyzeEmail() {
+            const emailContent = document.getElementById('emailContent').value;
+            if (!emailContent) {
+                alert('Please enter email content to analyze');
+                return;
+            }
+            
+            // Hide results and show loader
+            document.getElementById('emailAnalysisResult').style.display = 'none';
+            document.getElementById('emailAnalysisLoader').style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(function() {
+                // Hide loader
+                document.getElementById('emailAnalysisLoader').style.display = 'none';
+                
+                // Generate random risk score for demo
+                const riskScore = Math.floor(Math.random() * 100);
+                const riskLevel = riskScore < 30 ? 'Low' : riskScore < 70 ? 'Medium' : 'High';
+                const riskClass = riskScore < 30 ? 'risk-low' : riskScore < 70 ? 'risk-medium' : 'risk-high';
+                
+                // Update UI
+                document.getElementById('emailRiskMeter').style.width = riskScore + '%';
+                document.getElementById('emailRiskMeter').className = 'risk-meter-fill ' + riskClass;
+                document.getElementById('emailRiskLevel').textContent = riskLevel;
+                document.getElementById('emailRiskScore').textContent = riskScore;
+                
+                // Add details
+                const details = document.getElementById('emailAnalysisDetails');
+                details.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Analysis Details</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Suspicious phrases: ${Math.floor(Math.random() * 10)}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Sender pattern: ${Math.random() > 0.5 ? 'Normal' : 'Suspicious'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Link analysis: ${Math.random() > 0.5 ? 'Safe' : 'Suspicious'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Recommendations</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Email appears safe' : 'Exercise caution'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'No action needed' : 'Verify sender'}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Continue monitoring' : 'Consider blocking'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Show result
+                document.getElementById('emailAnalysisResult').style.display = 'block';
+            }, 2000);
+        }
+        
+        // Attachment Verification
+        document.getElementById('attachmentFileInput').addEventListener('change', function(e) {
+            handleFileSelection('attachment', 'attachmentFileInput', 'attachmentFileList', 'attachmentAnalyzeBtn');
+        });
+        
+        function analyzeAttachments() {
+            runAnalysis('attachment', function(riskScore) {
+                return `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Analysis Details</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Files analyzed: ${selectedFiles.attachment.length}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Malware scan: ${Math.random() > 0.5 ? 'Clean' : 'Threat detected'}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Suspicious content: ${Math.random() > 0.5 ? 'None' : 'Found'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Recommendations</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Files appear safe' : 'Exercise caution'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'No action needed' : 'Scan with antivirus'}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Continue monitoring' : 'Consider quarantine'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // URL Analysis
+        document.getElementById('urlFileInput').addEventListener('change', function(e) {
+            handleFileSelection('url', 'urlFileInput', 'urlFileList', 'urlAnalyzeBtn');
+        });
+        
+        function analyzeUrls() {
+            runAnalysis('url', function(riskScore) {
+                return `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Analysis Details</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>URLs analyzed: ${selectedFiles.url.length}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Domain reputation: ${Math.random() > 0.5 ? 'Good' : 'Poor'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>URL structure: ${Math.random() > 0.5 ? 'Normal' : 'Suspicious'}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>SSL Certificate: ${Math.random() > 0.5 ? 'Valid' : 'Invalid'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Recommendations</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'URLs appear safe' : 'Exercise caution'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'No action needed' : 'Verify legitimacy'}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Continue monitoring' : 'Consider blocking'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // Voice Analysis
+        document.getElementById('voiceFileInput').addEventListener('change', function(e) {
+            handleFileSelection('voice', 'voiceFileInput', 'voiceFileList', 'voiceAnalyzeBtn');
+        });
+        
+        function analyzeVoices() {
+            runAnalysis('voice', function(riskScore) {
+                return `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Analysis Details</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Audio files: ${selectedFiles.voice.length}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Voice pattern: ${Math.random() > 0.5 ? 'Natural' : 'Artificial'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Deepfake prob: ${Math.floor(Math.random() * 100)}%</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
+                                    <span>Audio quality: ${['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)]}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Recommendations</h6>
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Audio appears authentic' : 'Exercise caution'}</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'No action needed' : 'Verify speaker'}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
+                                    <span>${riskScore < 50 ? 'Continue monitoring' : 'Additional verification'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // Common file handling functions
+        function handleFileSelection(feature, inputId, fileListId, analyzeBtnId) {
+            const files = Array.from(document.getElementById(inputId).files);
+            selectedFiles[feature] = [...selectedFiles[feature], ...files];
+            updateFileList(feature, fileListId, analyzeBtnId);
+        }
+        
+        function updateFileList(feature, fileListId, analyzeBtnId) {
+            const fileList = document.getElementById(fileListId);
+            fileList.innerHTML = '';
+            
+            if (selectedFiles[feature].length === 0) {
+                document.getElementById(analyzeBtnId).disabled = true;
+                return;
+            }
+            
+            selectedFiles[feature].forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileIcon = getFileIcon(file.name);
+                
+                fileItem.innerHTML = `
+                    <div class="file-icon">
+                        <i class="bi ${fileIcon}"></i>
+                    </div>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${formatFileSize(file.size)}</div>
+                    </div>
+                    <button class="file-remove" onclick="removeFile('${feature}', ${index})">
+                        <i class="bi bi-x"></i>
+                    </button>
+                `;
+                
+                fileList.appendChild(fileItem);
+            });
+            
+            document.getElementById(analyzeBtnId).disabled = false;
+        }
+        
+        function removeFile(feature, index) {
+            selectedFiles[feature].splice(index, 1);
+            
+            const fileListId = feature + 'FileList';
+            const analyzeBtnId = feature + 'AnalyzeBtn';
+            
+            updateFileList(feature, fileListId, analyzeBtnId);
+        }
+        
+        function getFileIcon(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            const iconMap = {
+                'pdf': 'bi-file-earmark-pdf',
+                'doc': 'bi-file-earmark-word',
+                'docx': 'bi-file-earmark-word',
+                'xls': 'bi-file-earmark-excel',
+                'xlsx': 'bi-file-earmark-excel',
+                'exe': 'bi-file-earmark-exe',
+                'zip': 'bi-file-earmark-zip',
+                'mp3': 'bi-file-earmark-music',
+                'wav': 'bi-file-earmark-play',
+                'm4a': 'bi-file-earmark-play',
+                'flac': 'bi-file-earmark-play',
+                'ogg': 'bi-file-earmark-play',
+                'txt': 'bi-file-earmark-text',
+                'json': 'bi-filetype-json',
+                'csv': 'bi-filetype-csv',
+                'eml': 'bi-file-earmark-text',
+                'msg': 'bi-file-earmark-text'
+            };
+            return iconMap[ext] || 'bi-file-earmark';
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Common analysis function
+        function runAnalysis(feature, analysisDetails) {
+            // Hide results and show loader
+            const resultId = feature + 'AnalysisResult';
+            const loaderId = feature + 'AnalysisLoader';
+            const analyzeBtnId = feature + 'AnalyzeBtn';
+            
+            document.getElementById(resultId).style.display = 'none';
+            document.getElementById(loaderId).style.display = 'block';
+            document.getElementById(analyzeBtnId).disabled = true;
+            
+            // Show progress
+            const progressId = feature + 'UploadProgress';
+            const progressBarId = feature + 'ProgressBar';
+            const progressContainer = document.getElementById(progressId);
+            const progressBar = document.getElementById(progressBarId);
+            
+            progressContainer.style.display = 'block';
+            
+            // Simulate upload progress
+            let progress = 0;
+            const interval = setInterval(function() {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    // Simulate API call
+                    setTimeout(function() {
+                        // Hide loader and progress
+                        document.getElementById(loaderId).style.display = 'none';
+                        progressContainer.style.display = 'none';
+                        
+                        // Generate random risk score for demo
+                        const riskScore = Math.floor(Math.random() * 100);
+                        const riskLevel = riskScore < 30 ? 'Low' : riskScore < 70 ? 'Medium' : 'High';
+                        const riskClass = riskScore < 30 ? 'risk-low' : riskScore < 70 ? 'risk-medium' : 'risk-high';
+                        
+                        // Update UI
+                        const riskMeterId = feature + 'RiskMeter';
+                        const riskLevelId = feature + 'RiskLevel';
+                        const riskScoreId = feature + 'RiskScore';
+                        const analysisDetailsId = feature + 'AnalysisDetails';
+                        
+                        document.getElementById(riskMeterId).style.width = riskScore + '%';
+                        document.getElementById(riskMeterId).className = 'risk-meter-fill ' + riskClass;
+                        document.getElementById(riskLevelId).textContent = riskLevel;
+                        document.getElementById(riskScoreId).textContent = riskScore;
+                        
+                        // Add details
+                        document.getElementById(analysisDetailsId).innerHTML = analysisDetails(riskScore);
+                        
+                        // Show result
+                        document.getElementById(resultId).style.display = 'block';
+                        
+                        // Re-enable analyze button
+                        document.getElementById(analyzeBtnId).disabled = false;
+                    }, 2000);
+                }
+            }, 200);
+        }
+        
+        // Handle URL hash for direct navigation
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                navigateToFeature(hash);
+            }
+        });
+        
+        // Update URL hash when navigating
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash === '' || hash === 'home') {
+                showHome();
+            }
+        });
+    </script>
+</body>
+</html>
