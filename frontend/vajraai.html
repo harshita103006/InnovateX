@@ -1554,78 +1554,89 @@
         }
         
         // Email Analysis
-        function analyzeEmail() {
+        async function analyzeEmail() {
             const emailContent = document.getElementById('emailContent').value;
             if (!emailContent) {
                 alert('Please enter email content to analyze');
                 return;
             }
-            
+
             // Hide results and show loader
             document.getElementById('emailAnalysisResult').style.display = 'none';
             document.getElementById('emailAnalysisLoader').style.display = 'block';
-            
-            // Simulate API call
-            setTimeout(function() {
+
+            try {
+                // first line = subject, rest = body
+                const lines = emailContent.split('\n');
+                const subject = (lines[0] || '').trim();
+                const body = lines.slice(1).join('\n').trim() || emailContent.trim();
+
+                const res = await fetch("http://127.0.0.1:8000/analyze/email", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                     body: JSON.stringify({ subject, body })
+                });
+
+                if (!res.ok) throw new Error("Backend error: " + res.status);
+
+                const results = await res.json();
+
                 // Hide loader
                 document.getElementById('emailAnalysisLoader').style.display = 'none';
-                
-                // Generate random risk score for demo
-                const riskScore = Math.floor(Math.random() * 100);
-                const riskLevel = riskScore < 30 ? 'Low' : riskScore < 70 ? 'Medium' : 'High';
-                const riskClass = riskScore < 30 ? 'risk-low' : riskScore < 70 ? 'risk-medium' : 'risk-high';
-                
-                // Update UI
-                document.getElementById('emailRiskMeter').style.width = riskScore + '%';
-                document.getElementById('emailRiskMeter').className = 'risk-meter-fill ' + riskClass;
-                document.getElementById('emailRiskLevel').textContent = riskLevel;
+
+                // Map backend → frontend UI
+                const riskScore = results?.risk?.risk_percent ?? 0;  // number
+                const tier = results?.risk?.tier ?? "Safe";          // Safe/Medium/High/Critical
+
+                // risk meter
+                const riskMeter = document.getElementById('emailRiskMeter');
+                riskMeter.style.width = `${riskScore}%`;
+                riskMeter.className = `risk-meter-fill ${riskScore < 30 ? 'risk-low' : riskScore < 70 ? 'risk-medium' : 'risk-high'}`;
+
+                document.getElementById('emailRiskLevel').textContent = tier;
                 document.getElementById('emailRiskScore').textContent = riskScore;
-                
-                // Add details
-                const details = document.getElementById('emailAnalysisDetails');
-                details.innerHTML = `
+
+                // details block
+                const detailsElement = document.getElementById('emailAnalysisDetails');
+                const reasons = results?.top_reasons || [];
+                const flags = results?.regex?.flags || [];
+                const urls = results?.regex?.urls || [];
+                const masked = results?.privacy?.masked_preview || "";
+
+                detailsElement.innerHTML = `
                     <div class="row">
                         <div class="col-md-6">
                             <h6 class="mb-3">Analysis Details</h6>
                             <div class="stats-card">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
-                                    <span>Suspicious phrases: ${Math.floor(Math.random() * 10)}</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
-                                    <span>Sender pattern: ${Math.random() > 0.5 ? 'Normal' : 'Suspicious'}</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="bi bi-circle-fill text-${riskScore < 70 ? 'success' : 'danger'} me-2"></i>
-                                    <span>Link analysis: ${Math.random() > 0.5 ? 'Safe' : 'Suspicious'}</span>
-                                </div>
+                                <div class="mb-2">Flags: <b>${flags.length}</b></div>
+                                <div class="mb-2">URLs: <b>${urls.length}</b></div>
+                                <div class="mb-2">ML phishing prob: <b>${results?.ml?.phishing_prob ?? "N/A"}</b></div>
+                            </div>
+
+                            <h6 class="mt-3 mb-2">Top Reasons</h6>
+                            <div class="stats-card">
+                                ${(reasons.length ? reasons : ["No reasons"]).map(r => `<div class="mb-2">• ${r}</div>`).join('')}
                             </div>
                         </div>
+
                         <div class="col-md-6">
-                            <h6 class="mb-3">Recommendations</h6>
+                            <h6 class="mb-3">Masked Preview</h6>
                             <div class="stats-card">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
-                                    <span>${riskScore < 50 ? 'Email appears safe' : 'Exercise caution'}</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
-                                    <span>${riskScore < 50 ? 'No action needed' : 'Verify sender'}</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-arrow-right-circle text-primary me-2"></i>
-                                    <span>${riskScore < 50 ? 'Continue monitoring' : 'Consider blocking'}</span>
-                                </div>
+                                <pre style="white-space:pre-wrap;margin:0;">${masked}</pre>
                             </div>
                         </div>
                     </div>
                 `;
-                
-                // Show result
+
                 document.getElementById('emailAnalysisResult').style.display = 'block';
-            }, 2000);
+
+            } catch (err) {
+            document.getElementById('emailAnalysisLoader').style.display = 'none';
+            alert("Failed to analyze email: " + err.message);
+            console.error(err);
+            }
         }
+
         
         // Attachment Verification
         document.getElementById('attachmentFileInput').addEventListener('change', function(e) {
